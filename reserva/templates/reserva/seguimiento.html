@@ -1,0 +1,28 @@
+{% extends "reserva/base.html" %}
+
+{% block titulo %}Ticket {{ codigo }}{% endblock %}
+
+{% block contenido %}
+<h1>Comprobante de Reserva: <span class="codigo">{{ codigo }}</span></h1>
+
+{% if reserva %}
+<div class="tarjeta">
+    <p><strong>Estado del Turno:</strong> 
+        <span class="estado e-{{ reserva.estado_pago|lower }}">{{ reserva.estado_pago }}</span>
+    </p>
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 16px 0;">
+    <p><strong>Responsable:</strong> {{ reserva.usuario.nombre_completo }}</p>
+    <p><strong>Teléfono de contacto:</strong> {{ reserva.usuario.telefono }}</p>
+    <p><strong>Fecha del Partido:</strong> {{ reserva.fecha|date:"d/m/Y" }}</p>
+    <p><strong>Bloque Horario:</strong> {{ reserva.hora_inicio }} a {{ reserva.hora_fin }}</p>
+    <p><strong>Monto Total:</strong> Bs. {{ reserva.monto_total }}</p>
+    <p><small>Reserva ingresada vía: {{ reserva.origen }}</small></p>
+</div>
+{% else %}
+<div class="tarjeta">
+    <p class="aviso">El código de ticket "{{ codigo }}" no se encuentra registrado en el sistema. Verifica que esté bien escrito e inténtalo de nuevo.</p>
+</div>
+{% endif %}
+
+<p><a href="{% url 'seguimiento_buscar' %}" style="color: #1b4332; font-weight: bold; text-decoration: none;">← Consultar otro ticket</a></p>
+{% endblock %}

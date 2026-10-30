@@ -1,0 +1,29 @@
+{% extends "reserva/base.html" %}
+
+{% block titulo %}Consultar Ticket{% endblock %}
+
+{% block contenido %}
+<h1>Seguimiento de tu Reserva</h1>
+
+<div class="tarjeta">
+    <p>Introduce el código de 6 caracteres impreso en tu comprobante para verificar el estado de la reserva y el pago de tu cancha.</p>
+    
+    <!-- Formulario HTML de búsqueda por método GET -->
+    <form method="get">
+        <input 
+            type="text" 
+            name="codigo" 
+            placeholder="Ej.: K7M2QX" 
+            maxlength="8" 
+            style="padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; text-transform: uppercase;" 
+            required
+        >
+        <button 
+            type="submit" 
+            style="background: #1b4332; color: white; border: none; padding: 11px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 15px;"
+        >
+            Consultar Estado
+        </button>
+    </form>
+</div>
+{% endblock %}
