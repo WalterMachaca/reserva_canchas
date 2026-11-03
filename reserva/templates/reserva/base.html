@@ -3,36 +3,40 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block titulo %}Cancha "Alto San Juanillo"{% endblock %}</title>
+    {% block cabecera %}{% endblock %}
+    <title>{% block titulo %}Reserva de canchas{% endblock %}</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; background: #f4f5f7; }
-        header { background: #1b4332; padding: 14px 24px; }
+        header { background: #2b2d42; padding: 14px 24px; }
         header a { color: #fff; text-decoration: none; font-weight: bold; margin-right: 20px; }
         main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
-        .tarjeta { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+        .tarjeta { background: #fff; border-radius: 8px; padding: 16px;
+                   margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
         table { width: 100%; border-collapse: collapse; background: #fff; }
-        th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid #e3e5e8; }
+        th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e3e5e8; }
         th { background: #e9ebef; }
-        .estado { border-radius: 12px; padding: 4px 12px; font-size: 13px; font-weight: bold; }
-        .e-pendiente { background: #ffe8b3; color: #b7791f; }
-        .e-pagado { background: #c9f0d6; color: #22543d; }
-        .codigo { font-family: Consolas, monospace; font-weight: bold; letter-spacing: 2px; color: #1b4332; }
-        .form-fecha { background: #fff; padding: 16px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
-        .form-fecha input[type="date"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
-        .form-fecha button { background: #1b4332; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .boton { display: inline-block; padding: 12px 20px; font-size: 18px; background: #1f3a5f;
+                 color: #fff; border: 0; border-radius: 8px; text-decoration: none; cursor: pointer; }
         .aviso { color: #a33; font-weight: bold; }
-        footer { text-align: center; color: #777; padding: 24px; margin-top: 40px; border-top: 1px solid #e3e5e8; }
+        .ok { color: #1e7b4f; font-weight: bold; }
+        input[type=text], select { padding: 10px; font-size: 18px; width: 100%; box-sizing: border-box; }
+        footer { text-align: center; color: #777; padding: 24px; }
+        .turnos { display: flex; flex-wrap: wrap; gap: 8px; }
+        .turno { border-radius: 8px; padding: 10px 12px; min-width: 130px; text-align: center; }
+        .libre { background: #c9f0d6; color: #14532d; text-decoration: none; font-weight: bold; }
+        .ocupado { background: #e3e5e8; color: #555; }
     </style>
 </head>
 <body>
     <header>
-        <a href="{% url 'ordenes' %}">Ver Agenda</a>
-        <a href="{% url 'seguimiento_buscar' %}">Consultar Ticket</a>
+        <a href="{% url 'inicio' %}">Horarios disponibles</a>
+        <a href="{% url 'reservas' %}">Reservas hechas</a>
     </header>
     <main>
         {% block contenido %}{% endblock %}
     </main>
-    <footer>Módulo de Reservas — Cancha Alto San Juanillo</footer>
+    <footer>Reserva de canchas — (Programación II — TECBA)</footer>
 </body>
 </html>
+
 

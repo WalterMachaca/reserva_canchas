@@ -1,0 +1,19 @@
+{% extends "reserva/base.html" %}
+ 
+{% block cabecera %}<meta http-equiv="refresh" content="5">{% endblock %}
+ 
+{% block contenido %}
+<h1>Reservas hechas</h1>
+<table>
+    <tr><th>Cancha</th><th>Horario</th><th>A nombre de</th></tr>
+    {% for r in reservas %}
+    <tr>
+        <td>{{ r.cancha.nombre }}</td>
+        <td>{{ r.hora }}:00 – {{ r.hora|add:1 }}:00</td>
+        <td>{{ r.nombre }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">Todavía no hay reservas.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

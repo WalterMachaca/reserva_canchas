@@ -1,0 +1,12 @@
+{% extends "reserva/base.html" %}
+ 
+{% block contenido %}
+<h1>Reserva confirmada</h1>
+<div class="tarjeta">
+    <p class="ok">✓ Tu horario quedó guardado.</p>
+    <p><strong>A nombre de:</strong> {{ reserva.nombre }}</p>
+    <p><strong>Cancha:</strong> {{ reserva.cancha.nombre }} ({{ reserva.cancha.deporte }})</p>
+    <p><strong>Horario:</strong> {{ texto }}</p>
+</div>
+<p><a href="{% url 'inicio' %}">← Ver los horarios</a></p>
+{% endblock %}

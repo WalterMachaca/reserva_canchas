@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
  
 urlpatterns = [
-    path("", views.agenda_reservas, name="ordenes"), 
-    path("seguimiento/", views.seguimiento_buscar, name="seguimiento_buscar"),
-    path("seguimiento/<str:codigo>/", views.seguimiento, name="seguimiento"),
+    path("", views.inicio, name="inicio"),
+    path("reservar/<int:cancha_id>/<int:hora>/", views.reservar, name="reservar"),
+    path("reserva/<int:pk>/", views.confirmacion, name="confirmacion"),    
+    path("reservas/", views.reservas, name="reservas"),
 ]

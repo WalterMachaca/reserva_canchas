@@ -1,0 +1,20 @@
+{% extends "reserva/base.html" %}
+ 
+{% block contenido %}
+<h1>Reservar horario</h1>
+<div class="tarjeta">
+    <p><strong>Cancha:</strong> {{ cancha.nombre }} ({{ cancha.deporte }})</p>
+    {% if texto %}<p><strong>Horario:</strong> {{ texto }}</p>{% endif %}
+    {% if mensaje %}<p class="aviso">{{ mensaje }}</p>{% endif %}
+</div>
+ 
+{% if texto and not ocupado %}
+<form method="post" class="tarjeta">
+    {% csrf_token %}
+    <label for="nombre"><strong>Tu nombre</strong></label>
+    <input type="text" name="nombre" id="nombre" maxlength="80" autofocus>
+    <p><button type="submit" class="boton">Confirmar reserva</button></p>
+</form>
+{% endif %}
+<p><a href="{% url 'inicio' %}">← Volver a los horarios</a></p>
+{% endblock %}

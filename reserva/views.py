@@ -1,57 +1,56 @@
+from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Usuario, Reserva
-from datetime import date
+ 
+from .models import Cancha, Reserva
+ 
+ 
+def texto_turno(hora):
+    return f"{hora:02d}:00 – {hora + 1:02d}:00"
+ 
+ 
+def inicio(request):
+    tablero = []
+    for cancha in Cancha.objects.all():
+        reservas = {r.hora: r for r in cancha.reservas.all()}
+        turnos = []
+        for hora in cancha.horas():
+            turnos.append({"hora": hora, "texto": texto_turno(hora),
+                           "reserva": reservas.get(hora)})
+        tablero.append({"cancha": cancha, "turnos": turnos})
+    return render(request, "reserva/inicio.html", {"tablero": tablero})
+ 
+ 
+def reservar(request, cancha_id, hora):
+    cancha = get_object_or_404(Cancha, pk=cancha_id)
+    if hora not in cancha.horas():
+        return render(request, "reserva/reservar.html",
+                      {"cancha": cancha, "mensaje": "Ese horario no existe."},
+                      status=404)
+    contexto = {"cancha": cancha, "hora": hora, "texto": texto_turno(hora)}
+    if request.method == "POST":
+        nombre = request.POST.get("nombre", "").strip()
+        if not nombre:
+            contexto["mensaje"] = "Escribe tu nombre para reservar."
+        else:
+            try:
+                reserva = Reserva.objects.create(
+                    cancha=cancha, hora=hora, nombre=nombre)
+            except IntegrityError:
+                contexto["mensaje"] = "Ese horario ya fue reservado por otra persona."
+                contexto["ocupado"] = True
+            else:
+                return redirect("confirmacion", pk=reserva.pk)
+    elif Reserva.objects.filter(cancha=cancha, hora=hora).exists():
+        contexto["mensaje"] = "Ese horario ya está reservado."
+        contexto["ocupado"] = True
+    return render(request, "reserva/reservar.html", contexto)
+ 
+ 
+def confirmacion(request, pk):
+    reserva = get_object_or_404(Reserva, pk=pk)
+    contexto = {"reserva": reserva, "texto": texto_turno(reserva.hora)}
+    return render(request, "reserva/confirmacion.html", contexto)
 
-def agenda_reservas(request):
-    """
-    Vista principal: Muestra las reservas de la cancha.
-    Por defecto filtra las reservas para la fecha de hoy, permitiendo ver qué 
-    horarios ya están ocupados.
-    """
-    # Obtiene la fecha del filtro (si no viene ninguna, usa la fecha de hoy)
-    fecha_filtro_str = request.GET.get("fecha")
-    
-    if fecha_filtro_str:
-        try:
-            fecha_busqueda = date.fromisoformat(fecha_filtro_str)
-        except ValueError:
-            fecha_busqueda = date.today()
-    else:
-        fecha_busqueda = date.today()
-
-    # Obtiene todas las reservas de esa fecha específica ordenadas por hora
-    lista_reservas = Reserva.objects.filter(fecha=fecha_busqueda).order_by("hora_inicio")
-    
-    contexto = {
-        "reservas": lista_reservas,
-        "fecha_actual": fecha_busqueda,
-        "hoy_string": fecha_busqueda.isoformat()
-    }
-    return render(request, "reserva/ordenes.html", contexto)
-
-
-def seguimiento_buscar(request):
-    """
-    Página intermedia para que el usuario escriba el código de su ticket.
-    Redirige automáticamente limpiando espacios y convirtiendo a mayúsculas.
-    """
-    codigo = request.GET.get("codigo", "").strip().upper()
-    if codigo:
-        return redirect("seguimiento", codigo=codigo)
-    return render(request, "reserva/seguimiento_buscar.html")
-
-
-def seguimiento(request, codigo):
-    """
-    Muestra la ficha de una reserva específica usando su código de seguimiento público.
-    No requiere inicio de sesión. Si el código no existe, devuelve un error 404 controlado.
-    """
-    reserva = Reserva.objects.filter(codigo_seguimiento=codigo.upper()).first()
-    contexto = {
-        "reserva": reserva, 
-        "codigo": codigo.upper()
-    }
-    estado = 200 if reserva else 404
-    return render(request, "reserva/seguimiento.html", contexto, status=estado)
-
-
+def reservas(request):
+    lista = Reserva.objects.order_by("cancha__nombre", "hora")
+    return render(request, "reserva/reservas.html", {"reservas": lista})
