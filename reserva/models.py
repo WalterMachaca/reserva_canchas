@@ -1,13 +1,15 @@
 from django.db import models
 from django.utils import timezone
- 
+from django.core.validators import MinValueValidator
  
 class Cancha(models.Model):
     nombre = models.CharField(max_length=60)
     deporte = models.CharField(max_length=40)
     hora_apertura = models.IntegerField(default=8, verbose_name="Abre a las (hora)")
     hora_cierre = models.IntegerField(default=22, verbose_name="Cierra a las (hora)")
- 
+    max_horas = models.PositiveIntegerField(
+        default=1, validators=[MinValueValidator(1)],
+        verbose_name="Máximo de horas seguidas por reserva")
     def horas(self):
         return range(self.hora_apertura, self.hora_cierre)
  

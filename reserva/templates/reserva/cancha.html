@@ -1,0 +1,25 @@
+{% extends "reserva/base.html" %}
+
+{% block cabecera %}<meta http-equiv="refresh" content="5">{% endblock %}
+
+{% block contenido %}
+<p><a href="{% url 'inicio' %}">← Volver a las canchas</a></p>
+<h1>{{ cancha.nombre }} <small>— {{ cancha.deporte }}</small></h1>
+<p>Elige un horario verde para reservarlo. Los grises ya están ocupados.
+{% if cancha.max_horas > 1 %}En esta cancha puedes reservar hasta {{ cancha.max_horas }} horas seguidas.{% endif %}</p>
+
+<div class="tarjeta">
+    <div class="turnos">
+        {% for t in turnos %}
+            {% if t.reserva %}
+            <div class="turno ocupado">{{ t.texto }}<br><small>Reservado: {{ t.reserva.nombre }}</small></div>
+            {% else %}
+            <a class="turno libre" href="{% url 'reservar' cancha.pk t.hora %}">{{ t.texto }}<br><small>Libre</small></a>
+            {% endif %}
+        {% empty %}
+            <p>Esta cancha no tiene horarios configurados.</p>
+        {% endfor %}
+    </div>
+</div>
+<p><small>Esta página se actualiza sola cada 5 segundos.</small></p>
+{% endblock %}

@@ -9,7 +9,7 @@
     {% for r in reservas %}
     <tr>
         <td>{{ r.cancha.nombre }}</td>
-        <td>{{ r.hora }}:00 – {{ r.hora|add:1 }}:00</td>
+        <td>{{ r.texto }}{% if r.horas > 1 %} <small>({{ r.horas }} horas)</small>{% endif %}</td>
         <td>{{ r.nombre }}</td>
     </tr>
     {% empty %}

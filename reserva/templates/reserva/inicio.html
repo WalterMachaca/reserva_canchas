@@ -1,24 +1,23 @@
 {% extends "reserva/base.html" %}
- 
+
 {% block cabecera %}<meta http-equiv="refresh" content="5">{% endblock %}
- 
+
 {% block contenido %}
-<h1>Horarios disponibles de hoy</h1>
-<p>Elige un horario verde para reservarlo. Los grises ya están ocupados.</p>
- 
-{% for item in tablero %}
-<div class="tarjeta">
+<h1>Canchas</h1>
+<p>Elige una cancha para ver sus horarios disponibles.</p>
+
+{% for item in canchas %}
+<a class="tarjeta cancha-link" href="{% url 'cancha' item.cancha.pk %}">
     <h2>{{ item.cancha.nombre }} <small>— {{ item.cancha.deporte }}</small></h2>
-    <div class="turnos">
-        {% for t in item.turnos %}
-            {% if t.reserva %}
-            <div class="turno ocupado">{{ t.texto }}<br><small>Reservado: {{ t.reserva.nombre }}</small></div>
-            {% else %}
-            <a class="turno libre" href="{% url 'reservar' item.cancha.pk t.hora %}">{{ t.texto }}<br><small>Libre</small></a>
-            {% endif %}
-        {% endfor %}
-    </div>
-</div>
+    <p>
+        Atiende de {{ item.cancha.hora_apertura }}:00 a {{ item.cancha.hora_cierre }}:00
+        ·
+        {% if item.libres %}<span class="ok">{{ item.libres }} horario{{ item.libres|pluralize }} libre{{ item.libres|pluralize }}</span>
+        {% else %}<span class="aviso">Sin horarios libres</span>{% endif %}
+        {% if item.cancha.max_horas > 1 %}· Hasta {{ item.cancha.max_horas }} horas seguidas{% endif %}
+    </p>
+    <span class="boton">Ver horarios →</span>
+</a>
 {% empty %}
 <div class="tarjeta"><p>Todavía no hay canchas. Agrégalas desde el panel de administración.</p></div>
 {% endfor %}

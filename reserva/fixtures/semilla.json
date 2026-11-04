@@ -1,0 +1,156 @@
+[
+{
+  "model": "reserva.cancha",
+  "pk": 1,
+  "fields": {
+    "nombre": "Cancha Mesa Verde",
+    "deporte": "Futbol",
+    "hora_apertura": 8,
+    "hora_cierre": 20,
+    "max_horas": 2
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 2,
+  "fields": {
+    "nombre": "Complejo las Palmeras",
+    "deporte": "Futbol 5",
+    "hora_apertura": 8,
+    "hora_cierre": 23,
+    "max_horas": 2
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 3,
+  "fields": {
+    "nombre": "Cancha Libertadores",
+    "deporte": "Futbol 5",
+    "hora_apertura": 8,
+    "hora_cierre": 23,
+    "max_horas": 2
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 4,
+  "fields": {
+    "nombre": "Complejo Deportivo Real Audiencia",
+    "deporte": "Futbol 5",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 2
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 5,
+  "fields": {
+    "nombre": "Cancha Tocopilla",
+    "deporte": "Futsal / Basquet",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 1
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 6,
+  "fields": {
+    "nombre": "Cancha San Cristobal",
+    "deporte": "Futsal / Basquet",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 1
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 7,
+  "fields": {
+    "nombre": "Coliseo Alto Delicias",
+    "deporte": "Futsal",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 2
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 8,
+  "fields": {
+    "nombre": "Coliseo Los Pinos",
+    "deporte": "Futsal",
+    "hora_apertura": 8,
+    "hora_cierre": 24,
+    "max_horas": 2
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 9,
+  "fields": {
+    "nombre": "Cancha Municipal",
+    "deporte": "Futsal / Basquet / Voleibol",
+    "hora_apertura": 8,
+    "hora_cierre": 24,
+    "max_horas": 2
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 10,
+  "fields": {
+    "nombre": "Cancha Valle Hermoso",
+    "deporte": "Futsal / Basquet",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 1
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 11,
+  "fields": {
+    "nombre": "Cancha de Villa Charcas",
+    "deporte": "Futsal / Basquet",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 2
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 12,
+  "fields": {
+    "nombre": "Coliseo JRA",
+    "deporte": "futsal / Basquet / Voleibol",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 1
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 13,
+  "fields": {
+    "nombre": "Cancha San José",
+    "deporte": "Futsal/ Basquet / Voleibol",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 1
+  }
+},
+{
+  "model": "reserva.cancha",
+  "pk": 14,
+  "fields": {
+    "nombre": "Cancha San José",
+    "deporte": "Futsal/ Basquet / Voleibol",
+    "hora_apertura": 8,
+    "hora_cierre": 22,
+    "max_horas": 1
+  }
+}
+]

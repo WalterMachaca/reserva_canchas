@@ -6,7 +6,7 @@
     <p class="ok">✓ Tu horario quedó guardado.</p>
     <p><strong>A nombre de:</strong> {{ reserva.nombre }}</p>
     <p><strong>Cancha:</strong> {{ reserva.cancha.nombre }} ({{ reserva.cancha.deporte }})</p>
-    <p><strong>Horario:</strong> {{ texto }}</p>
+    <p><strong>Horario:</strong> {{ texto }}{% if horas > 1 %} ({{ horas }} horas){% endif %}</p>
 </div>
-<p><a href="{% url 'inicio' %}">← Ver los horarios</a></p>
+<p><a href="{% url 'inicio' %}">← Ver las canchas</a></p>
 {% endblock %}
